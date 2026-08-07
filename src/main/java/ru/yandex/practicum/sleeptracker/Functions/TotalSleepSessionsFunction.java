@@ -1,6 +1,7 @@
 package ru.yandex.practicum.sleeptracker.Functions;
 
-import ru.yandex.practicum.sleeptracker.SleepSession;
+import ru.yandex.practicum.sleeptracker.DTO.SleepAnalysisResult;
+import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
 
 import java.util.List;
 import java.util.function.Function;

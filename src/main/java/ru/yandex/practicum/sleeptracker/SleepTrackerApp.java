@@ -1,6 +1,7 @@
 package ru.yandex.practicum.sleeptracker;
 
-import ru.yandex.practicum.sleeptracker.Functions.SleepAnalysisResult;
+import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
+import ru.yandex.practicum.sleeptracker.DTO.SleepAnalysisResult;
 import ru.yandex.practicum.sleeptracker.Functions.TotalSleepSessionsFunction;
 import ru.yandex.practicum.sleeptracker.IO.SleepLogs;
 

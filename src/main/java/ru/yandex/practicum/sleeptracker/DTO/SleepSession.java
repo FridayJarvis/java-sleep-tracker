@@ -1,4 +1,6 @@
-package ru.yandex.practicum.sleeptracker;
+package ru.yandex.practicum.sleeptracker.DTO;
+
+import ru.yandex.practicum.sleeptracker.SleepQuality;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

@@ -2,7 +2,7 @@ package ru.yandex.practicum.sleeptracker.IO;
 
 import ru.yandex.practicum.sleeptracker.Exception.SessionParseException;
 import ru.yandex.practicum.sleeptracker.SleepQuality;
-import ru.yandex.practicum.sleeptracker.SleepSession;
+import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
 
 import java.io.BufferedReader;
 import java.io.IOException;
