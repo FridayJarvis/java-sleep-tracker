@@ -18,9 +18,8 @@ public class SleepLogs {
     private SleepLogs() {
     }
 
-    public static List<SleepSession> load(final String sleepLogPath) {
-        try (final BufferedReader reader = Files.newBufferedReader(
-                Path.of(sleepLogPath), StandardCharsets.UTF_8)) {
+    public static List<SleepSession> load(final Path sleepLogPath) {
+        try (final BufferedReader reader = Files.newBufferedReader(sleepLogPath, StandardCharsets.UTF_8)) {
             return reader.lines()
                     .map(SleepLogs::parseSleepLogLine)
                     .flatMap(Optional::stream)
