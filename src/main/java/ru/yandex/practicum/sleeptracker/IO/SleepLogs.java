@@ -23,11 +23,11 @@ public class SleepLogs {
                 Path.of(sleepLogPath), StandardCharsets.UTF_8)) {
             return reader.lines()
                     .map(SleepLogs::parseSleepLogLine)
-                    .filter(Optional::isPresent)
-                    .map(Optional::get)
+                    .flatMap(Optional::stream)
+                    .filter(session -> session.start().isBefore(session.finish()))
                     .toList();
         } catch (IOException e) {
-            throw new RuntimeException("The stream of output broke down");
+            throw new RuntimeException("Поток ввода не открылся по какой-то причине", e);
         }
     }
 
@@ -52,6 +52,7 @@ public class SleepLogs {
         try {
             LocalDateTime start = LocalDateTime.parse(splitLogLine[START_IND], SleepSession.FORMATTER);
             LocalDateTime finish = LocalDateTime.parse(splitLogLine[FINISH_IND], SleepSession.FORMATTER);
+
             SleepQuality quality = SleepQuality.valueOf(splitLogLine[QUALITY_IND]);
 
             return Optional.of(new SleepSession(start, finish, quality));
