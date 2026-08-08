@@ -56,7 +56,7 @@ public class SleepLogs {
 
             return Optional.of(new SleepSession(start, finish, quality));
         } catch (DateTimeParseException | IllegalArgumentException e) {
-            throw new SessionParseException("Invalid values during parsing: " + sleepLogLine, e);
+            throw new SessionParseException("Неверное значения для парсинга: " + sleepLogLine, e);
         }
     }
 }
