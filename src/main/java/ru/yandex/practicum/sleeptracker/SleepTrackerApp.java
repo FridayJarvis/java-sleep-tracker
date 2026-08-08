@@ -2,10 +2,7 @@ package ru.yandex.practicum.sleeptracker;
 
 import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
 import ru.yandex.practicum.sleeptracker.Exception.SleepLogNotFound;
-import ru.yandex.practicum.sleeptracker.Functions.AvgSessionByMinutesFunction;
-import ru.yandex.practicum.sleeptracker.Functions.MaxSessionByMinutesFunction;
-import ru.yandex.practicum.sleeptracker.Functions.MinSessionByMinutesFunction;
-import ru.yandex.practicum.sleeptracker.Functions.TotalSessionsFunction;
+import ru.yandex.practicum.sleeptracker.Functions.*;
 import ru.yandex.practicum.sleeptracker.IO.SleepLogs;
 
 import java.nio.file.Files;
@@ -35,6 +32,7 @@ public class SleepTrackerApp {
         functions.add(new MinSessionByMinutesFunction());
         functions.add(new MaxSessionByMinutesFunction());
         functions.add(new AvgSessionByMinutesFunction());
+        functions.add(new BadQualitySessionsFunction());
 
         for (var function : functions) {
             System.out.println(function.apply(sleepSessions));
