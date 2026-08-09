@@ -2,7 +2,7 @@ package ru.yandex.practicum.sleeptracker;
 
 import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
 import ru.yandex.practicum.sleeptracker.Exception.SleepLogNotFound;
-import ru.yandex.practicum.sleeptracker.Functions.*;
+import ru.yandex.practicum.sleeptracker.Function.*;
 import ru.yandex.practicum.sleeptracker.IO.SleepLogs;
 
 import java.nio.file.Files;

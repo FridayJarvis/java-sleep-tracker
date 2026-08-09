@@ -1,4 +1,4 @@
-package ru.yandex.practicum.sleeptracker.Functions;
+package ru.yandex.practicum.sleeptracker.Function;
 
 import ru.yandex.practicum.sleeptracker.DTO.SleepQuality;
 import ru.yandex.practicum.sleeptracker.DTO.SleepSession;

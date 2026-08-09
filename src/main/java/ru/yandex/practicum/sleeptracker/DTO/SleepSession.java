@@ -10,7 +10,7 @@ public record SleepSession(LocalDateTime start, LocalDateTime finish, SleepQuali
 
     @Override
     public String toString() {
-        return "сессия сна: " +
+        return "сессия сна:" +
                 "\n\t- начало: " + start.format(FORMATTER) +
                 "\n\t- конец: " + finish.format(FORMATTER) +
                 "\n\t- качество: " + sleepQuality +
