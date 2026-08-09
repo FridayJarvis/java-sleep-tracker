@@ -1,8 +1,8 @@
 package ru.yandex.practicum.sleeptracker.IO;
 
-import ru.yandex.practicum.sleeptracker.Exception.SessionParseException;
 import ru.yandex.practicum.sleeptracker.DTO.SleepQuality;
 import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
+import ru.yandex.practicum.sleeptracker.Exception.SessionParseException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,7 +32,12 @@ public class SleepLogs {
     }
 
     private static Optional<SleepSession> parseSleepLogLine(final String sleepLogLine) {
+
         if (sleepLogLine == null || sleepLogLine.isBlank()) {
+            System.err.println("""
+                    Ошибка парсинга:
+                    Пустая строка.
+                    ----------------------------------------""");
             return Optional.empty();
         }
 
@@ -40,8 +45,12 @@ public class SleepLogs {
 
         final int VALID_LENGTH_SPLIT_LINE = 3;
         if (splitLogLine.length != VALID_LENGTH_SPLIT_LINE) {
-            System.err.printf("Пропущена битая строка, т.к. передано неверное количество данных: %s/%s\n",
-                    splitLogLine.length, VALID_LENGTH_SPLIT_LINE);
+            System.err.printf("""
+                            Ошибка парсинга:
+                            Пропущена битая строка: %s, т.к. передано неверное количество данных: %d/%d
+                            ----------------------------------------
+                            """,
+                    sleepLogLine, splitLogLine.length, VALID_LENGTH_SPLIT_LINE);
             return Optional.empty();
         }
 
@@ -50,14 +59,25 @@ public class SleepLogs {
         final int QUALITY_IND = 2;
 
         try {
-            LocalDateTime start = LocalDateTime.parse(splitLogLine[START_IND], SleepSession.FORMATTER);
-            LocalDateTime finish = LocalDateTime.parse(splitLogLine[FINISH_IND], SleepSession.FORMATTER);
+            LocalDateTime start;
+            LocalDateTime finish;
+            SleepQuality quality;
+            try {
+                start = LocalDateTime.parse(splitLogLine[START_IND], SleepSession.FORMATTER);
+                finish = LocalDateTime.parse(splitLogLine[FINISH_IND], SleepSession.FORMATTER);
 
-            SleepQuality quality = SleepQuality.valueOf(splitLogLine[QUALITY_IND]);
+                quality = SleepQuality.valueOf(splitLogLine[QUALITY_IND]);
 
-            return Optional.of(new SleepSession(start, finish, quality));
-        } catch (DateTimeParseException | IllegalArgumentException e) {
-            throw new SessionParseException("Неверное значения для парсинга: " + sleepLogLine, e);
+                return Optional.of(new SleepSession(start, finish, quality));
+            } catch (DateTimeParseException | IllegalArgumentException e) {
+                throw new SessionParseException(String.format("""
+                        Ошибка парсинга:
+                        Битая строка: %s
+                        ----------------------------------------""", sleepLogLine));
+            }
+        } catch (SessionParseException e) {
+            System.err.println(e.getMessage());
+            return Optional.empty();
         }
     }
 }
