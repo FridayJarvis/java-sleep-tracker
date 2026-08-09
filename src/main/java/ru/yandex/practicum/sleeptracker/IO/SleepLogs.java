@@ -32,12 +32,7 @@ public class SleepLogs {
     }
 
     private static Optional<SleepSession> parseSleepLogLine(final String sleepLogLine) {
-
-        if (sleepLogLine == null || sleepLogLine.isBlank()) {
-            System.err.println("""
-                    Ошибка парсинга:
-                    Пустая строка.
-                    ----------------------------------------""");
+        if (sleepLogLine.isBlank()) {
             return Optional.empty();
         }
 
@@ -45,12 +40,6 @@ public class SleepLogs {
 
         final int VALID_LENGTH_SPLIT_LINE = 3;
         if (splitLogLine.length != VALID_LENGTH_SPLIT_LINE) {
-            System.err.printf("""
-                            Ошибка парсинга:
-                            Пропущена битая строка: %s, т.к. передано неверное количество данных: %d/%d
-                            ----------------------------------------
-                            """,
-                    sleepLogLine, splitLogLine.length, VALID_LENGTH_SPLIT_LINE);
             return Optional.empty();
         }
 
@@ -70,13 +59,9 @@ public class SleepLogs {
 
                 return Optional.of(new SleepSession(start, finish, quality));
             } catch (DateTimeParseException | IllegalArgumentException e) {
-                throw new SessionParseException(String.format("""
-                        Ошибка парсинга:
-                        Битая строка: %s
-                        ----------------------------------------""", sleepLogLine));
+                throw new SessionParseException();
             }
         } catch (SessionParseException e) {
-            System.err.println(e.getMessage());
             return Optional.empty();
         }
     }

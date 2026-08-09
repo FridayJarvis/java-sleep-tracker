@@ -34,8 +34,8 @@ public class SleepTrackerApp {
         functions.add(new AvgSessionByMinutesFunction());
         functions.add(new BadQualitySessionsFunction());
 
-        for (var function : functions) {
-            System.out.println(function.apply(sleepSessions));
-        }
+        functions.stream()
+                .map(function -> function.apply(sleepSessions))
+                .forEach(System.out::println);
     }
 }
