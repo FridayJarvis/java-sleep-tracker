@@ -24,6 +24,7 @@ public class SleepLogs {
                     .map(SleepLogs::parseSleepLogLine)
                     .flatMap(Optional::stream)
                     .filter(session -> session.start().isBefore(session.finish()))
+                    .distinct()
                     .toList();
         } catch (IOException e) {
             throw new RuntimeException("Поток ввода не открылся по какой-то причине", e);
