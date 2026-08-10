@@ -16,14 +16,17 @@ public class SleeplessNightsFunction implements Function<List<SleepSession>, Str
             return "Бессонных ночей: 0";
         }
 
-        LocalDateTime firstDateTime = SleepTrackerApp.theEarliestSession().orElseThrow().start();
-        if (firstDateTime.getHour() >= 12) {
-            firstDateTime = firstDateTime.plusDays(1);
+        LocalDateTime firstStartDateTime = SleepTrackerApp.theEarliestSession().orElseThrow().start();
+        if (firstStartDateTime.getHour() >= 12) {
+            firstStartDateTime = firstStartDateTime.plusDays(1);
         }
 
-        LocalDateTime lastDateTime = SleepTrackerApp.theLastSession().orElseThrow().end();
+        LocalDateTime lastStartDateTime = SleepTrackerApp.theLastSession().orElseThrow().start();
+        if (lastStartDateTime.getHour() >= 12) {
+            lastStartDateTime = lastStartDateTime.plusDays(1);
+        }
 
-        long sleeplessNights = firstDateTime.toLocalDate().datesUntil(lastDateTime.toLocalDate().plusDays(1))
+        long sleeplessNights = firstStartDateTime.toLocalDate().datesUntil(lastStartDateTime.toLocalDate().plusDays(1))
                 .map(date -> {
                     LocalDateTime nightStart = LocalDateTime.of(date, LocalTime.MIDNIGHT);
                     LocalDateTime nightFinish = LocalDateTime.of(date, LocalTime.of(6, 0));
