@@ -13,7 +13,7 @@ public class AvgSessionByMinutesFunction implements Function<List<SleepSession>,
     public String apply(List<SleepSession> sleepSessions) {
         double avgSession = sleepSessions.stream()
                 .filter(Objects::nonNull)
-                .mapToLong(session -> Duration.between(session.start(), session.finish()).toMinutes())
+                .mapToLong(session -> Duration.between(session.start(), session.end()).toMinutes())
                 .average()
                 .orElse(0.0);
 

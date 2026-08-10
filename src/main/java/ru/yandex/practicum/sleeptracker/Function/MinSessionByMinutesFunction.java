@@ -11,7 +11,7 @@ public class MinSessionByMinutesFunction implements Function<List<SleepSession>,
     @Override
     public String apply(List<SleepSession> sleepSessions) {
         return sleepSessions.stream()
-                .min(Comparator.comparing(session -> Duration.between(session.start(), session.finish())))
+                .min(Comparator.comparing(session -> Duration.between(session.start(), session.end())))
                 .map(session -> "Минимальная " + session)
                 .orElse("Минимальная сессия сна: 0 минут");
     }

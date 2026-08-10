@@ -19,20 +19,20 @@ class BadQualitySessionsFunctionTest {
     void testApplyWithNotEmptySessionList() {
         sessions = List.of(
                 new SleepSession(
-                        LocalDateTime.parse("01.10.25 23:15", SleepSession.FORMATTER),
-                        LocalDateTime.parse("02.10.25 07:30", SleepSession.FORMATTER),
+                        LocalDateTime.parse("01.10.25 23:15", Interval.FORMATTER),
+                        LocalDateTime.parse("02.10.25 07:30", Interval.FORMATTER),
                         SleepQuality.GOOD),
                 new SleepSession(
-                        LocalDateTime.parse("03.10.25 14:10", SleepSession.FORMATTER),
-                        LocalDateTime.parse("03.10.25 15:00", SleepSession.FORMATTER),
+                        LocalDateTime.parse("03.10.25 14:10", Interval.FORMATTER),
+                        LocalDateTime.parse("03.10.25 15:00", Interval.FORMATTER),
                         SleepQuality.NORMAL),
                 new SleepSession(
-                        LocalDateTime.parse("03.10.25 23:40", SleepSession.FORMATTER),
-                        LocalDateTime.parse("04.10.25 08:00", SleepSession.FORMATTER),
+                        LocalDateTime.parse("03.10.25 23:40", Interval.FORMATTER),
+                        LocalDateTime.parse("04.10.25 08:00", Interval.FORMATTER),
                         SleepQuality.BAD),
                 new SleepSession(
-                        LocalDateTime.parse("05.10.25 00:10", SleepSession.FORMATTER),
-                        LocalDateTime.parse("05.10.25 06:20", SleepSession.FORMATTER),
+                        LocalDateTime.parse("05.10.25 00:10", Interval.FORMATTER),
+                        LocalDateTime.parse("05.10.25 06:20", Interval.FORMATTER),
                         SleepQuality.BAD));
         assertEquals("Количество сессий с плохим качеством сна: 2", function.apply(sessions));
     }

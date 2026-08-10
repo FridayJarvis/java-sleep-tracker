@@ -7,12 +7,12 @@ import ru.yandex.practicum.sleeptracker.IO.SleepLogs;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.function.Function;
 
 public class SleepTrackerApp {
     private static final List<Function<List<SleepSession>, String>> functions = new ArrayList<>();
+    private static List<SleepSession> sleepSessions;
 
     public static void main(String[] args) {
         if (args.length == 0) {
@@ -26,16 +26,27 @@ public class SleepTrackerApp {
                     "\nФайла по данному пути не существует. Передайте актуальный путь аргументом при запуске программы.");
         }
 
-        List<SleepSession> sleepSessions = SleepLogs.load(sleepLogPath);
+        sleepSessions = SleepLogs.load(sleepLogPath);
 
         functions.add(new TotalSessionsFunction());
         functions.add(new MinSessionByMinutesFunction());
         functions.add(new MaxSessionByMinutesFunction());
         functions.add(new AvgSessionByMinutesFunction());
         functions.add(new BadQualitySessionsFunction());
+        functions.add(new SleeplessNightsFunction());
 
         functions.stream()
                 .map(function -> function.apply(sleepSessions))
                 .forEach(System.out::println);
+    }
+
+    public static Optional<SleepSession> theEarliestSession() {
+        return sleepSessions.stream()
+                .min(Comparator.comparing(SleepSession::start));
+    }
+
+    public static Optional<SleepSession> theLastSession() {
+        return sleepSessions.stream()
+                .max(Comparator.comparing(SleepSession::start));
     }
 }

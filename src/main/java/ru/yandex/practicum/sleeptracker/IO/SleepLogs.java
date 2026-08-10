@@ -1,5 +1,6 @@
 package ru.yandex.practicum.sleeptracker.IO;
 
+import ru.yandex.practicum.sleeptracker.DTO.DateTimeInterval;
 import ru.yandex.practicum.sleeptracker.DTO.SleepQuality;
 import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
 import ru.yandex.practicum.sleeptracker.Exception.SessionParseException;
@@ -23,7 +24,7 @@ public class SleepLogs {
             return reader.lines()
                     .map(SleepLogs::parseSleepLogLine)
                     .flatMap(Optional::stream)
-                    .filter(session -> session.start().isBefore(session.finish()))
+                    .filter(session -> session.start().isBefore(session.end()))
                     .distinct()
                     .toList();
         } catch (IOException e) {
@@ -52,8 +53,8 @@ public class SleepLogs {
             LocalDateTime finish;
             SleepQuality quality;
             try {
-                start = LocalDateTime.parse(splitLogLine[START_IND], SleepSession.FORMATTER);
-                finish = LocalDateTime.parse(splitLogLine[FINISH_IND], SleepSession.FORMATTER);
+                start = LocalDateTime.parse(splitLogLine[START_IND], DateTimeInterval.FORMATTER);
+                finish = LocalDateTime.parse(splitLogLine[FINISH_IND], DateTimeInterval.FORMATTER);
 
                 quality = SleepQuality.valueOf(splitLogLine[QUALITY_IND]);
 

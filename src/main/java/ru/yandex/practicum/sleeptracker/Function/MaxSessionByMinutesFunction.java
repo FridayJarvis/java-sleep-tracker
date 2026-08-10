@@ -11,7 +11,7 @@ public class MaxSessionByMinutesFunction implements Function<List<SleepSession>,
     @Override
     public String apply(List<SleepSession> sleepSessions) {
         return sleepSessions.stream()
-                .max(Comparator.comparing(session -> Duration.between(session.start(), session.finish())))
+                .max(Comparator.comparing(session -> Duration.between(session.start(), session.end())))
                 .map(session -> "Максимальная " + session)
                 .orElse("Максимальная сессия сна: 0 минут");
     }
