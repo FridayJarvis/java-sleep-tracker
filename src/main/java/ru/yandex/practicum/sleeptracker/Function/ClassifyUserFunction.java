@@ -62,15 +62,15 @@ public class ClassifyUserFunction implements Function<List<SleepSession>, String
             targetNight = targetNight.plusDays(1);
         }
 
-        LocalDateTime owlStartLimit = LocalDateTime.of(targetNight, LocalTime.of(23, 0));
+        LocalDateTime owlStartLimit = LocalDateTime.of(targetNight.minusDays(1), LocalTime.of(23, 0));
         LocalDateTime owlEndLimit = LocalDateTime.of(targetNight, LocalTime.of(9, 0));
 
-        LocalDateTime larkStartLimit = LocalDateTime.of(targetNight, LocalTime.of(22, 0));
+        LocalDateTime larkStartLimit = LocalDateTime.of(targetNight.minusDays(1), LocalTime.of(22, 0));
         LocalDateTime larkEndLimit = LocalDateTime.of(targetNight, LocalTime.of(7, 0));
 
-        if (session.start().isAfter(owlStartLimit) && session.end().isBefore(owlEndLimit)) {
+        if (session.start().isAfter(owlStartLimit) && session.end().isAfter(owlEndLimit)) {
             return SleepClassification.OWL;
-        } else if (session.start().isAfter(larkStartLimit) && session.end().isBefore(larkEndLimit)) {
+        } else if (session.start().isBefore(larkStartLimit) && session.end().isBefore(larkEndLimit)) {
             return SleepClassification.LARK;
         } else {
             return SleepClassification.DOVE;
