@@ -2,7 +2,6 @@ package ru.yandex.practicum.sleeptracker.Function;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.w3c.dom.ls.LSOutput;
 import ru.yandex.practicum.sleeptracker.DTO.DateTimeInterval;
 import ru.yandex.practicum.sleeptracker.DTO.SleepQuality;
 import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
@@ -113,7 +112,7 @@ class SleeplessNightsFunctionTest {
 
     @Test
     @DisplayName("2 сессии: одна со стартом в интервале от 06:00 до 12:00, другая от 12:00 до 00:00")
-    void shouldReturn2SleeplessNightsOneAfter6Before12AndOneAfter12Before24(){
+    void shouldReturn2SleeplessNightsOneAfter6Before12AndOneAfter12Before24() {
         sessions = List.of(
                 new SleepSession(//сон со стартом в интервале от 06:00 до 12:00
                         LocalDateTime.parse("01.10.25 11:59", DateTimeInterval.FORMATTER),

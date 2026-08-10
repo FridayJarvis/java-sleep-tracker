@@ -6,7 +6,6 @@ import ru.yandex.practicum.sleeptracker.DTO.DateTimeInterval;
 import ru.yandex.practicum.sleeptracker.DTO.SleepQuality;
 import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 

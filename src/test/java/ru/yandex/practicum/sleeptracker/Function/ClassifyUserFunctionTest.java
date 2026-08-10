@@ -33,7 +33,7 @@ class ClassifyUserFunctionTest {
                         LocalDateTime.parse("01.10.25 23:30", DateTimeInterval.FORMATTER),
                         LocalDateTime.parse("02.10.25 09:30", DateTimeInterval.FORMATTER),
                         SleepQuality.GOOD),
-                new SleepSession( //еще одна ночь типа "сова", даже если уснул за полночь
+                new SleepSession(//еще одна ночь типа "сова", даже если уснул за полночь
                         LocalDateTime.parse("03.10.25 01:00", DateTimeInterval.FORMATTER),
                         LocalDateTime.parse("03.10.25 10:00", DateTimeInterval.FORMATTER),
                         SleepQuality.NORMAL));
