@@ -40,13 +40,13 @@ public class SleepTrackerApp {
                 .forEach(System.out::println);
     }
 
-    public static Optional<SleepSession> theEarliestSession() {
-        return sleepSessions.stream()
+    public static Optional<SleepSession> theEarliestSession(List<SleepSession> sessions) {
+        return sessions.stream()
                 .min(Comparator.comparing(SleepSession::start));
     }
 
-    public static Optional<SleepSession> theLastSession() {
-        return sleepSessions.stream()
+    public static Optional<SleepSession> theLastSession(List<SleepSession> sessions) {
+        return sessions.stream()
                 .max(Comparator.comparing(SleepSession::start));
     }
 }

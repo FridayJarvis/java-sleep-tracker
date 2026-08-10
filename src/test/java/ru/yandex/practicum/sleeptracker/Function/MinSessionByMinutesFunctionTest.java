@@ -16,7 +16,7 @@ class MinSessionByMinutesFunctionTest {
     List<SleepSession> sessions;
 
     @Test
-    @DisplayName("Работа функции с непустым списком")
+    @DisplayName("Непустой список записей сна")
     void testApplyWithNotEmptySessionList() {
         sessions = List.of(
                 new SleepSession(
@@ -41,7 +41,7 @@ class MinSessionByMinutesFunctionTest {
     }
 
     @Test
-    @DisplayName("Работа функции с пустым списком")
+    @DisplayName("Пустой список записей сна")
     void testApplyWithEmptySessionList() {
         assertEquals("Минимальная сессия сна: 0 минут", function.apply(List.of()));
     }

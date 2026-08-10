@@ -6,6 +6,7 @@ import ru.yandex.practicum.sleeptracker.DTO.DateTimeInterval;
 import ru.yandex.practicum.sleeptracker.DTO.SleepQuality;
 import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,13 +17,14 @@ class AvgSessionByMinutesFunctionTest {
     List<SleepSession> sessions;
 
     @Test
-    @DisplayName("Работа функции с пустым списком")
+    @DisplayName("Пустой список записей сна")
     void testApplyWithEmptySessionList() {
         assertEquals("Средняя сессия сна: 0.00 минут", function.apply(List.of()));
+        assertEquals("Средняя сессия сна: 0.00 минут", function.apply(null));
     }
 
     @Test
-    @DisplayName("Работа функции с 1 записью")
+    @DisplayName("1 запись сна")
     void testApplyWith1Log() {
         sessions = List.of(new SleepSession(
                 LocalDateTime.parse("01.10.25 23:15", DateTimeInterval.FORMATTER),
@@ -32,7 +34,7 @@ class AvgSessionByMinutesFunctionTest {
     }
 
     @Test
-    @DisplayName("Работа функции c множеством записей")
+    @DisplayName("Больше одной записи сна")
     void testApplyWithManyLogs() {
         sessions = List.of(
                 new SleepSession(

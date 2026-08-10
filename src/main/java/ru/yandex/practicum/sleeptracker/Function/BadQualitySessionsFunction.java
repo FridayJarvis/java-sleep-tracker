@@ -9,8 +9,11 @@ import java.util.function.Function;
 
 public class BadQualitySessionsFunction implements Function<List<SleepSession>, String> {
     @Override
-    public String apply(List<SleepSession> sleepSessions) {
-        long badSessions = sleepSessions.stream()
+    public String apply(List<SleepSession> sessions) {
+        if (sessions == null) {
+            return "Количество сессий с плохим качеством сна: 0";
+        }
+        long badSessions = sessions.stream()
                 .filter(Objects::nonNull)
                 .filter(session -> session.sleepQuality() == SleepQuality.BAD)
                 .count();

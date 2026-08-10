@@ -12,16 +12,24 @@ public class SleeplessNightsFunction implements Function<List<SleepSession>, Str
 
     @Override
     public String apply(List<SleepSession> sessions) {
-        if (sessions == null || sessions.isEmpty()) {
+        if (sessions == null) {
             return "Бессонных ночей: 0";
         }
 
-        LocalDateTime firstStartDateTime = SleepTrackerApp.theEarliestSession().orElseThrow().start();
+        List<SleepSession> validSessions = sessions.stream()
+                .filter(session -> session.start().isBefore(session.end()))
+                .toList();
+
+        if (validSessions.isEmpty()) {
+            return "Бессонных ночей: 0";
+        }
+
+        LocalDateTime firstStartDateTime = SleepTrackerApp.theEarliestSession(validSessions).orElseThrow().start();
         if (firstStartDateTime.getHour() >= 12) {
             firstStartDateTime = firstStartDateTime.plusDays(1);
         }
 
-        LocalDateTime lastStartDateTime = SleepTrackerApp.theLastSession().orElseThrow().start();
+        LocalDateTime lastStartDateTime = SleepTrackerApp.theLastSession(validSessions).orElseThrow().start();
         if (lastStartDateTime.getHour() >= 12) {
             lastStartDateTime = lastStartDateTime.plusDays(1);
         }
@@ -32,9 +40,9 @@ public class SleeplessNightsFunction implements Function<List<SleepSession>, Str
                     LocalDateTime nightFinish = LocalDateTime.of(date, LocalTime.of(6, 0));
                     return new DateTimeInterval(nightStart, nightFinish);
                 }).filter(night ->
-                        sessions.stream().noneMatch(session ->
-                                session.start().isBefore(night.end()) && session.end().isAfter(night.start()) &&
-                                session.start().isBefore(session.end())))
+                        validSessions.stream()
+                                .noneMatch(session ->
+                                        session.start().isBefore(night.end()) && session.end().isAfter(night.start())))
                 .count();
         return "Бессонных ночей: " + sleeplessNights;
     }

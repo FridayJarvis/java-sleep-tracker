@@ -15,7 +15,7 @@ class TotalSessionsFunctionTest {
     List<SleepSession> sessions;
 
     @Test
-    @DisplayName("Работа функции с непустым списком")
+    @DisplayName("Непустой список записей сна")
     void testApplyWithNotEmptySessionList() {
         sessions = List.of(
                 new SleepSession(
@@ -35,7 +35,7 @@ class TotalSessionsFunctionTest {
     }
 
     @Test
-    @DisplayName("Работа функции с пустым списком")
+    @DisplayName("Пустой список записей сна")
     void testApplyWithEmptySessionList() {
         assertEquals("Сессий сна всего: 0", function.apply(List.of()));
     }
