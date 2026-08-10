@@ -6,6 +6,7 @@ import ru.yandex.practicum.sleeptracker.SleepTrackerApp;
 
 import java.time.*;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 
 public class SleeplessNightsFunction implements Function<List<SleepSession>, String> {
@@ -17,6 +18,7 @@ public class SleeplessNightsFunction implements Function<List<SleepSession>, Str
         }
 
         List<SleepSession> validSessions = sessions.stream()
+                .filter(Objects::nonNull)
                 .filter(session -> session.start().isBefore(session.end()))
                 .toList();
 

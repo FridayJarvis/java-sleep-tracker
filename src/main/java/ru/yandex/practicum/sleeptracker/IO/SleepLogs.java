@@ -50,15 +50,15 @@ public class SleepLogs {
 
         try {
             LocalDateTime start;
-            LocalDateTime finish;
+            LocalDateTime end;
             SleepQuality quality;
             try {
                 start = LocalDateTime.parse(splitLogLine[START_IND], DateTimeInterval.FORMATTER);
-                finish = LocalDateTime.parse(splitLogLine[FINISH_IND], DateTimeInterval.FORMATTER);
+                end = LocalDateTime.parse(splitLogLine[FINISH_IND], DateTimeInterval.FORMATTER);
 
                 quality = SleepQuality.valueOf(splitLogLine[QUALITY_IND]);
 
-                return Optional.of(new SleepSession(start, finish, quality));
+                return Optional.of(new SleepSession(start, end, quality));
             } catch (DateTimeParseException | IllegalArgumentException e) {
                 throw new SessionParseException();
             }

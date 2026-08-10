@@ -34,6 +34,7 @@ public class SleepTrackerApp {
         functions.add(new AvgSessionByMinutesFunction());
         functions.add(new BadQualitySessionsFunction());
         functions.add(new SleeplessNightsFunction());
+        functions.add(new ClassifyUserFunction());
 
         functions.stream()
                 .map(function -> function.apply(sleepSessions))
