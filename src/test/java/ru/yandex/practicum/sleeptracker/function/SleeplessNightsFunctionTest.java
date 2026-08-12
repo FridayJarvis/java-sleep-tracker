@@ -182,6 +182,22 @@ class SleeplessNightsFunctionTest {
     }
 
     @Test
+    @DisplayName("2 сессии: первая начинается в одном месяце, вторая в следующем")
+    void shouldReturn3SleeplessWithFirstSessionStartsBefore12InFirstMothAnd2ndSessionStartsIsDayAfterInNextMonth() {
+        sessions = List.of(
+                new SleepSession(//сон начинается до 12:00. Интервал логирования начинается в 1ом месяце
+                        LocalDateTime.parse("29.02.24 11:59", DateTimeInterval.FORMATTER),
+                        LocalDateTime.parse("01.03.24 00:00", DateTimeInterval.FORMATTER),
+                        SleepQuality.GOOD),
+                new SleepSession(//сон через день после конца 1ого, начало 2ого сна от 06:00. Интервал логирования заканчивается во 2ом мес.
+                        LocalDateTime.parse("02.03.24 06:00", DateTimeInterval.FORMATTER),
+                        LocalDateTime.parse("02.03.24 11:59", DateTimeInterval.FORMATTER),
+                        SleepQuality.GOOD));
+        assertEquals("Бессонных ночей: 3", function.apply(sessions)); /*3, т.к. первая сессия начинается до 12:00 (+1), бессонная
+         ночь 01.02.24 и второй сон также как и 1ый начинается после 6, но до 12 (+1)*/
+    }
+
+    @Test
     @DisplayName("График здорового человека (хочу себе такой же)")
     void shouldReturn0SleeplessNightsWithPerfectSessions() {
         sessions = List.of(
@@ -203,5 +219,4 @@ class SleeplessNightsFunctionTest {
                         SleepQuality.BAD));
         assertEquals("Бессонных ночей: 0", function.apply(sessions));
     }
-
 }
