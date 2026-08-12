@@ -1,4 +1,4 @@
-package ru.yandex.practicum.sleeptracker.DTO;
+package ru.yandex.practicum.sleeptracker.dto;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

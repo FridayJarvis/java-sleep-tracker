@@ -1,9 +1,9 @@
-package ru.yandex.practicum.sleeptracker.IO;
+package ru.yandex.practicum.sleeptracker.io;
 
-import ru.yandex.practicum.sleeptracker.DTO.DateTimeInterval;
-import ru.yandex.practicum.sleeptracker.DTO.SleepQuality;
-import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
-import ru.yandex.practicum.sleeptracker.Exception.SessionParseException;
+import ru.yandex.practicum.sleeptracker.dto.DateTimeInterval;
+import ru.yandex.practicum.sleeptracker.dto.SleepQuality;
+import ru.yandex.practicum.sleeptracker.dto.SleepSession;
+import ru.yandex.practicum.sleeptracker.exception.SessionParseException;
 
 import java.io.BufferedReader;
 import java.io.IOException;

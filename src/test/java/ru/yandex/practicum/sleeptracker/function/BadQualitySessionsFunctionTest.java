@@ -1,18 +1,18 @@
-package ru.yandex.practicum.sleeptracker.Function;
+package ru.yandex.practicum.sleeptracker.function;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.yandex.practicum.sleeptracker.DTO.DateTimeInterval;
-import ru.yandex.practicum.sleeptracker.DTO.SleepQuality;
-import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
+import ru.yandex.practicum.sleeptracker.dto.DateTimeInterval;
+import ru.yandex.practicum.sleeptracker.dto.SleepQuality;
+import ru.yandex.practicum.sleeptracker.dto.SleepSession;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MaxSessionByMinutesFunctionTest {
-    static final MaxSessionByMinutesFunction function = new MaxSessionByMinutesFunction();
+class BadQualitySessionsFunctionTest {
+    static final BadQualitySessionsFunction function = new BadQualitySessionsFunction();
     List<SleepSession> sessions;
 
     @Test
@@ -30,19 +30,18 @@ class MaxSessionByMinutesFunctionTest {
                 new SleepSession(
                         LocalDateTime.parse("03.10.25 23:40", DateTimeInterval.FORMATTER),
                         LocalDateTime.parse("04.10.25 08:00", DateTimeInterval.FORMATTER),
+                        SleepQuality.BAD),
+                new SleepSession(
+                        LocalDateTime.parse("05.10.25 00:10", DateTimeInterval.FORMATTER),
+                        LocalDateTime.parse("05.10.25 06:20", DateTimeInterval.FORMATTER),
                         SleepQuality.BAD));
-        assertEquals("""
-                Максимальная сессия сна:
-                \t- начало: 03.10.25 23:40
-                \t- конец: 04.10.25 08:00
-                \t- качество: BAD
-                \t- продолжительность: 500 минут""", function.apply(sessions));
+        assertEquals("Количество сессий с плохим качеством сна: 2", function.apply(sessions));
     }
 
     @Test
     @DisplayName("Пустой список записей сна")
     void testApplyWithEmptySessionList() {
-        assertEquals("Максимальная сессия сна: 0 минут", function.apply(List.of()));
+        assertEquals("Количество сессий с плохим качеством сна: 0", function.apply(List.of()));
     }
 
 }

@@ -1,10 +1,10 @@
-package ru.yandex.practicum.sleeptracker.IO;
+package ru.yandex.practicum.sleeptracker.io;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
+import ru.yandex.practicum.sleeptracker.dto.SleepSession;
 
 import java.io.IOException;
 import java.nio.file.Files;

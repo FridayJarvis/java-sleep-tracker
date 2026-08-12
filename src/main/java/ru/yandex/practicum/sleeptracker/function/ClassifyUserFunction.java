@@ -1,7 +1,7 @@
-package ru.yandex.practicum.sleeptracker.Function;
+package ru.yandex.practicum.sleeptracker.function;
 
-import ru.yandex.practicum.sleeptracker.DTO.SleepClassification;
-import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
+import ru.yandex.practicum.sleeptracker.dto.SleepClassification;
+import ru.yandex.practicum.sleeptracker.dto.SleepSession;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

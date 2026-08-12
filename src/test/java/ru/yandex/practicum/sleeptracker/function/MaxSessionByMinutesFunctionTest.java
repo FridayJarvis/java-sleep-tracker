@@ -1,17 +1,18 @@
-package ru.yandex.practicum.sleeptracker.Function;
+package ru.yandex.practicum.sleeptracker.function;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.yandex.practicum.sleeptracker.DTO.DateTimeInterval;
-import ru.yandex.practicum.sleeptracker.DTO.SleepQuality;
-import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
-import static org.junit.jupiter.api.Assertions.*;
+import ru.yandex.practicum.sleeptracker.dto.DateTimeInterval;
+import ru.yandex.practicum.sleeptracker.dto.SleepQuality;
+import ru.yandex.practicum.sleeptracker.dto.SleepSession;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-class TotalSessionsFunctionTest {
-    static final TotalSessionsFunction function = new TotalSessionsFunction();
+import static org.junit.jupiter.api.Assertions.*;
+
+class MaxSessionByMinutesFunctionTest {
+    static final MaxSessionByMinutesFunction function = new MaxSessionByMinutesFunction();
     List<SleepSession> sessions;
 
     @Test
@@ -30,13 +31,18 @@ class TotalSessionsFunctionTest {
                         LocalDateTime.parse("03.10.25 23:40", DateTimeInterval.FORMATTER),
                         LocalDateTime.parse("04.10.25 08:00", DateTimeInterval.FORMATTER),
                         SleepQuality.BAD));
-
-        assertEquals("Сессий сна всего: 3", function.apply(sessions));
+        assertEquals("""
+                Максимальная сессия сна:
+                \t- начало: 03.10.25 23:40
+                \t- конец: 04.10.25 08:00
+                \t- качество: BAD
+                \t- продолжительность: 500 минут""", function.apply(sessions));
     }
 
     @Test
     @DisplayName("Пустой список записей сна")
     void testApplyWithEmptySessionList() {
-        assertEquals("Сессий сна всего: 0", function.apply(List.of()));
+        assertEquals("Максимальная сессия сна: 0 минут", function.apply(List.of()));
     }
+
 }

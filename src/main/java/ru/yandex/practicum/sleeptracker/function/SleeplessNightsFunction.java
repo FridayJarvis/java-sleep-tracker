@@ -1,7 +1,7 @@
-package ru.yandex.practicum.sleeptracker.Function;
+package ru.yandex.practicum.sleeptracker.function;
 
-import ru.yandex.practicum.sleeptracker.DTO.DateTimeInterval;
-import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
+import ru.yandex.practicum.sleeptracker.dto.DateTimeInterval;
+import ru.yandex.practicum.sleeptracker.dto.SleepSession;
 import ru.yandex.practicum.sleeptracker.SleepTrackerApp;
 
 import java.time.*;

@@ -1,6 +1,6 @@
-package ru.yandex.practicum.sleeptracker.Function;
+package ru.yandex.practicum.sleeptracker.function;
 
-import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
+import ru.yandex.practicum.sleeptracker.dto.SleepSession;
 
 import java.time.Duration;
 import java.util.Comparator;

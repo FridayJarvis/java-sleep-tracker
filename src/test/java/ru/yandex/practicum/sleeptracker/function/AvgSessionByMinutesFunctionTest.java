@@ -1,10 +1,10 @@
-package ru.yandex.practicum.sleeptracker.Function;
+package ru.yandex.practicum.sleeptracker.function;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.yandex.practicum.sleeptracker.DTO.DateTimeInterval;
-import ru.yandex.practicum.sleeptracker.DTO.SleepQuality;
-import ru.yandex.practicum.sleeptracker.DTO.SleepSession;
+import ru.yandex.practicum.sleeptracker.dto.DateTimeInterval;
+import ru.yandex.practicum.sleeptracker.dto.SleepQuality;
+import ru.yandex.practicum.sleeptracker.dto.SleepSession;
 
 import java.time.LocalDateTime;
 import java.util.List;
