@@ -3,7 +3,6 @@ package ru.yandex.practicum.sleeptracker.io;
 import ru.yandex.practicum.sleeptracker.dto.DateTimeInterval;
 import ru.yandex.practicum.sleeptracker.dto.SleepQuality;
 import ru.yandex.practicum.sleeptracker.dto.SleepSession;
-import ru.yandex.practicum.sleeptracker.exception.SessionParseException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -48,22 +47,15 @@ public class SleepLogs {
         final int FINISH_IND = 1;
         final int QUALITY_IND = 2;
 
-        try {
-            LocalDateTime start;
-            LocalDateTime end;
-            SleepQuality quality;
             try {
-                start = LocalDateTime.parse(splitLogLine[START_IND], DateTimeInterval.FORMATTER);
-                end = LocalDateTime.parse(splitLogLine[FINISH_IND], DateTimeInterval.FORMATTER);
+                LocalDateTime start = LocalDateTime.parse(splitLogLine[START_IND], DateTimeInterval.FORMATTER);
+                LocalDateTime end = LocalDateTime.parse(splitLogLine[FINISH_IND], DateTimeInterval.FORMATTER);
 
-                quality = SleepQuality.valueOf(splitLogLine[QUALITY_IND]);
+                SleepQuality quality = SleepQuality.valueOf(splitLogLine[QUALITY_IND]);
 
                 return Optional.of(new SleepSession(start, end, quality));
             } catch (DateTimeParseException | IllegalArgumentException e) {
-                throw new SessionParseException();
+                return Optional.empty();
             }
-        } catch (SessionParseException e) {
-            return Optional.empty();
-        }
     }
 }
